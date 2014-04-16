@@ -10,8 +10,11 @@ class Heap(object):
   def __init__(self):
     self.__heap = []
   
-  def max_heapify(self):
-    pass
+  def max_heapify(self, i):
+    """assumes both the left and right subtree 
+       are max heapify"""
+    if i < 1 or i >= len(self.__heap):
+        return
   
   def extract_max(self):
     """extracts the max element from the heap"""
