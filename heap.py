@@ -24,13 +24,13 @@ class Heap(object):
     largest = i
     if self.__heap[left_child] > self.__heap[largest]:
         largest = left_child
-    if self.__heap[right_child] > self.__heal[largest]:
+    if self.__heap[right_child] > self.__heap[largest]:
         largest = right_child
     if largest != i:
         temp = self.__heap[i]
         self.__heap[i] = self.__heap[largest]
         self.__heap[largest] = temp
-        max_heapify(largest)
+        self.max_heapify(largest)
 
   def extract_max(self):
     """extracts the max element from the heap"""
