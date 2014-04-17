@@ -12,13 +12,21 @@ class Heap(object):
     
   def build_heap(self):
       """builds the heap"""
-      pass
+      mid = len(self.__heap) // 2
+      for i in xrange(mid, 0, - 1):
+        self.max_heapify(i)
+    
+  def heap_sort(self):
+    """sorts the heap"""
+    pass
   
   def max_heapify(self, i, max_size = 0):
     """assumes both the left and right subtree 
        are max heapify. Max size is zero if we want to 
        operate on the entire heap"""
-    if i < 1 or i >= len(self.__heap):
+    if max_size == 0:
+        max_size = len(self.__heap)
+    if i < 1 or i > max_size:
         return
     left_child = 2 * i
     right_child = (2 * i) + 1
@@ -56,3 +64,14 @@ class Heap(object):
        This method does not extract the max element"""
     return self.__heap[1]
   
+  def print(self):
+    """prints the current heap"""
+    num_nodes = 1
+    count = 0
+    for i in self.__heap:
+      print i,
+      count += 1
+      if count = num_nodes:
+        num_nodes *= 2
+        count = 0 
+        print
