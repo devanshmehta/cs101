@@ -7,12 +7,13 @@ class Heap(object):
   
   """Heap which consists of numbers"""
   
-  def __init__(self, heap = []):
+  def __init__(self, heap = [0]):
     self.__heap = heap
+    self.heap_size = len(heap) - 1
     
   def build_heap(self):
       """builds the heap"""
-      mid = len(self.__heap) // 2
+      mid = self.heap_size // 2
       for i in xrange(mid, 0, - 1):
         self.max_heapify(i)
     
@@ -25,15 +26,17 @@ class Heap(object):
        are max heapify. Max size is zero if we want to 
        operate on the entire heap"""
     if max_size == 0:
-        max_size = len(self.__heap)
+        max_size = self.heap_size
     if i < 1 or i > max_size:
         return
     left_child = 2 * i
-    right_child = (2 * i) + 1
+    right_child = left_child + 1
     largest = i
-    if self.__heap[left_child] > self.__heap[largest]:
+    if (left_child <= self.heap_size and 
+        self.__heap[left_child] > self.__heap[largest]):
         largest = left_child
-    if self.__heap[right_child] > self.__heap[largest]:
+    if (right_child <= self.heap_size and 
+        self.__heap[right_child] > self.__heap[largest]):
         largest = right_child
     if largest != i:
         temp = self.__heap[i]
@@ -43,9 +46,17 @@ class Heap(object):
 
   def extract_max(self):
     """extracts the max element from the heap"""
-    pass
+    max_element = self.__heap[1]
+    last_element = self.__heap[-1]
+    self.heap_size -= 1
+    self.__heap[1] = last_element
+    self.max_heapify(1)
+    self.__heap.pop()
+    return max_element
 
   def sift_up(self, index):
+    if index == 1:
+      return
     parent_index = index // 2
     if self.__heap[parent_index] < self.__heap[index]:
       temp = self.__heap[parent_index]
@@ -56,22 +67,48 @@ class Heap(object):
   def insert(self, i):
     """inserts element i in the heap"""
     self.__heap.append(i)
-    index = len(self.__heap) - 1
-    self.sift_up(index)
+    self.heap_size += 1
+    self.sift_up(self.heap_size)
     
   def peek(self):
     """returns the current max element of the heap. 
        This method does not extract the max element"""
     return self.__heap[1]
   
-  def print(self):
+  def print_heap(self):
     """prints the current heap"""
     num_nodes = 1
     count = 0
-    for i in self.__heap:
+    for index in xrange(1, self.heap_size + 1):
+      i = self.__heap[index]
       print i,
       count += 1
-      if count = num_nodes:
+      if count == num_nodes:
         num_nodes *= 2
         count = 0 
         print
+    print
+
+def main():
+  arr = [0,1,2,3,4,5,6,7,]
+  heap = Heap(arr)
+  heap.print_heap()
+  heap.build_heap()
+  heap.print_heap()
+  print heap.extract_max()
+  print
+  print heap.extract_max()
+  print
+  heap.print_heap()
+  print
+  heap.insert(6)
+  heap.insert(7)
+  heap.insert(-1)
+  heap.print_heap()
+  print heap.extract_max()
+  print
+  print heap.extract_max()
+
+
+if __name__ == '__main__':  
+  main()
