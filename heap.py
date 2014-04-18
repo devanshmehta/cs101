@@ -19,30 +19,36 @@ class Heap(object):
     
   def heap_sort(self):
     """sorts the heap"""
-    pass
-  
+    current_size = self.heap_size
+    for i in xrange(1, self.heap_size):
+      tmp = self.__heap[1]
+      self.__heap[1] = self.__heap[current_size]
+      self.__heap[current_size] = tmp
+      current_size -= 1
+      self.max_heapify(1, current_size)      
+ 
   def max_heapify(self, i, max_size = 0):
     """assumes both the left and right subtree 
        are max heapify. Max size is zero if we want to 
        operate on the entire heap"""
     if max_size == 0:
         max_size = self.heap_size
-    if i < 1 or i >= max_size:
+    if i < 1 or i > max_size:
         return
     left_child = 2 * i
     right_child = left_child + 1
     largest = i
-    if (left_child <= self.heap_size and 
+    if (left_child <= max_size and 
         self.__heap[left_child] > self.__heap[largest]):
         largest = left_child
-    if (right_child <= self.heap_size and 
+    if (right_child <= max_size and 
         self.__heap[right_child] > self.__heap[largest]):
         largest = right_child
     if largest != i:
         temp = self.__heap[i]
         self.__heap[i] = self.__heap[largest]
         self.__heap[largest] = temp
-        self.max_heapify(largest)
+        self.max_heapify(largest, max_size)
 
   def extract_max(self):
     """extracts the max element from the heap"""
@@ -77,9 +83,11 @@ class Heap(object):
   
   def print_heap(self):
     """prints the current heap"""
+    new_line = False
     num_nodes = 1
     count = 0
     for index in xrange(1, self.heap_size + 1):
+      new_line = False
       i = self.__heap[index]
       print i,
       count += 1
@@ -87,7 +95,10 @@ class Heap(object):
         num_nodes *= 2
         count = 0 
         print
+        new_line = True
     print
+    if not new_line:
+      print
 
 def main():
   arr = [0,1,2,3,4,5,6,7,]
@@ -96,19 +107,20 @@ def main():
   heap.build_heap()
   heap.print_heap()
   print heap.extract_max()
-  print
   print heap.extract_max()
   print
   heap.print_heap()
-  print
   heap.insert(6)
   heap.insert(7)
   heap.insert(-1)
   heap.print_heap()
   print heap.extract_max()
-  print
   print heap.extract_max()
-
+  heap.print_heap()
+  heap.heap_sort()
+  heap.print_heap()
+  heap.build_heap()
+  heap.print_heap()
 
 if __name__ == '__main__':  
   main()
