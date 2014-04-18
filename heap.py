@@ -26,7 +26,7 @@ class Heap(object):
        operate on the entire heap"""
     if max_size == 0:
         max_size = len(self.__heap)
-    if i < 1 or i > max_size:
+    if i < 1 or i >= max_size:
         return
     left_child = 2 * i
     right_child = (2 * i) + 1
@@ -43,8 +43,12 @@ class Heap(object):
 
   def extract_max(self):
     """extracts the max element from the heap"""
-    pass
-
+    max_element = self.__heap[1]
+    last_element = self.__heap[-1]
+    self.__heap[1] = last_element
+    self.max_heapify(1, len(self.__heap) - 1)
+    return max_element
+    
   def sift_up(self, index):
     parent_index = index // 2
     if self.__heap[parent_index] < self.__heap[index]:
@@ -56,7 +60,7 @@ class Heap(object):
   def insert(self, i):
     """inserts element i in the heap"""
     self.__heap.append(i)
-    index = len(self.__heap) - 1
+    index = len(self.__heap) - 2
     self.sift_up(index)
     
   def peek(self):
