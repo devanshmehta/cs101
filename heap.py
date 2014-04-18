@@ -27,7 +27,7 @@ class Heap(object):
        operate on the entire heap"""
     if max_size == 0:
         max_size = self.heap_size
-    if i < 1 or i > max_size:
+    if i < 1 or i >= max_size:
         return
     left_child = 2 * i
     right_child = left_child + 1
@@ -53,7 +53,7 @@ class Heap(object):
     self.max_heapify(1)
     self.__heap.pop()
     return max_element
-
+    
   def sift_up(self, index):
     if index == 1:
       return
