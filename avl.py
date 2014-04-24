@@ -60,7 +60,7 @@ def successor(node):
   """successor of the node. returns -1 if there is no successor"""
   def find_first_left_parent(node):
     if not node.parent:
-      return -1
+      return None
     else:
       parent = node.parent
       if parent.left_child == node:
@@ -77,13 +77,13 @@ def predecessor(node):
   """predecessor of the node. returns -1 if there is no predecessor"""
   def find_first_right_parent(node):
     if not node.parent:
-      return -1
+      return None
     else:
       parent = node.parent
       if parent.right_child == node:
-        return parent.data
+        return parent
       else:
-        find_first_right_parent(parent)
+        return find_first_right_parent(parent)
         
   if node.left_child:
     return find_max(node.left_child)
