@@ -13,6 +13,14 @@ def height(node):
     else: 
       return right_height
 
+def inorder_traversal(node, elements = []):
+  """inorder traversal of avl tree"""
+  if not node:
+    return
+  inorder_traversal(node.left_child)
+  elements.append(node.data)
+  inorder_traversal(node.right_child)
+
 class AvlNode:
   
   def __init__(self, data, left_node = None, right_node = None, height = 0):
@@ -51,4 +59,6 @@ class AvlTree:
     pass
   
   def sort_tree(self):
-    pass
+    sorted_elements = []
+    inorder_traversal(self.head, sorted_elements)
+    return sorted_elements
