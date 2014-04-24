@@ -8,6 +8,17 @@ def max(a, b):
   else:
     return b
 
+def height_node(node):
+  if node == None:
+    return -1
+  else:
+    return node.height
+    
+def set_height_node(node):
+  if node == None:
+    return
+  node.height = max(height_node(node.left_child), height_node(node.right_child)) + 1
+
 def left_rotate(node):
   '''left rotating avl node'''
   x = node
@@ -89,6 +100,16 @@ def predecessor(node):
     return find_max(node.left_child)
   else:
     return find_first_right_parent(node)
+    
+def insert_node(node, i):
+  if node == None:
+    return AvlNode(i)
+  if node.data < i:
+    insert_node(node.left_child, i)
+  else:
+    return insert_node(node.right_child, i)
+  set_node_height(node)
+  //fix avl tree
 
 class AvlNode:
   
