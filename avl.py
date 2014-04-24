@@ -2,10 +2,18 @@
 
 __author__ = 'devansh.mht@gmail.com'
 
+class AvlNode:
+  
+  def __init__(self, data, left_node = None, right_node = None, height = 0):
+    self.left_node = left_node
+    self.right_node = right_node
+    self.height = height
+    self.data = data
+
 class AvlTree:
   
   def __init__(self):
-    pass
+    self.head = None
   
   def insert(self, i):
     pass
