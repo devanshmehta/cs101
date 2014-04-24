@@ -84,21 +84,6 @@ class AvlTree:
   def delete(self, i):
     pass
   
-  def find_min(self):
-    node = self.head
-    while node:
-      node = node.left_child
-    return node.data
-  
-  def find_max(self):
-    node = self.head
-    while node:
-      node = node.right_child
-    return node.data
-  
-  def predecessor(self):
-    pass
-  
   def sort_tree(self):
     sorted_elements = []
     inorder_traversal(self.head, sorted_elements)
