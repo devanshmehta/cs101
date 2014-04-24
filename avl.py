@@ -33,10 +33,16 @@ class AvlTree:
     pass
   
   def find_min(self):
-    pass
+    node = self.head
+    while node:
+      node = node.left_child
+    return node.data
   
   def find_max(self):
-    pass
+    node = self.head
+    while node:
+      node = node.right_child
+    return node.data
   
   def successor(self):
     pass
