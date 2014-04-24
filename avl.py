@@ -110,6 +110,9 @@ def predecessor(node):
     return find_max(node.left_child)
   else:
     return find_first_right_parent(node)
+
+def get_height_diff(node):
+  return height_node(node.left_child) - height_node(node.right_child)
     
 def insert_node(node, i):
   if node == None:
