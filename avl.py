@@ -2,6 +2,17 @@
 
 __author__ = 'devansh.mht@gmail.com'
 
+def height(node):
+  if node == None:
+    return 0
+  else:
+    left_height = height(node.left_child) + 1
+    right_height = height(node.right_child) + 1
+    if left_height > right_height:
+      return left_height
+    else: 
+      return right_height
+
 class AvlNode:
   
   def __init__(self, data, left_node = None, right_node = None, height = 0):
