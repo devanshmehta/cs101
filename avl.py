@@ -2,6 +2,12 @@
 
 __author__ = 'devansh.mht@gmail.com'
 
+def max(a, b):
+  if a > b:
+    return a
+  else:
+    return b
+
 def left_rotate(node):
   '''left rotating avl node'''
   x = node
@@ -11,15 +17,9 @@ def left_rotate(node):
   c = y.right_child
   y.left_child = x
   x.right_child = b
-  if b.height > a.height:
-    x.height = b.height + 1
-  else:
-    x.height = a.height + 1
-  if x.height > c.height:
-    y.height = x.height + 1
-  else:
-    y.height = c.height + 1
-    
+  x.height = max(a.height, b.height) + 1
+  y.height = max(x.height, c.height) + 1
+  
 def right_rotate(node):
   '''right rotating avl node'''
   y = node
@@ -29,25 +29,16 @@ def right_rotate(node):
   c = y.right_child
   y.left_child = b
   x.right_child = y
-  if b.height > c.height:
-    y.height = b.height + 1
-  else:
-    b.height = c.height + 1
-  if a.height > y.height:
-    x.height = a.height + 1
-  else:
-    x.height = y.height + 1
-
+  y.height = max(b.height, c.height) + 1
+  x.height = max(a.height, y.height) + 1
+  
 def height(node):
   if node == None:
     return 0
   else:
-    left_height = height(node.left_child) + 1
-    right_height = height(node.right_child) + 1
-    if left_height > right_height:
-      return left_height
-    else: 
-      return right_height
+    left_height = height(node.left_child)
+    right_height = height(node.right_child)
+    return max(left_height, right_height) + 1
 
 def inorder_traversal(node, elements = []):
   """inorder traversal of avl tree"""
@@ -115,7 +106,7 @@ class AvlTree:
     self.head = None
   
   def insert(self, i):
-    pass
+    pass    
   
   def delete(self, i):
     pass
