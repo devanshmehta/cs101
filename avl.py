@@ -14,10 +14,12 @@ def height_node(node):
   else:
     return node.height
     
-def set_height_node(node):
+def set_node_height(node):
   if node == None:
     return
-  node.height = max(height_node(node.left_child), height_node(node.right_child)) + 1
+  left_height = height_node(node.left_child)
+  right_height = height_node(node.right_child)
+  node.height = max(left_height, right_height) + 1
 
 def left_rotate(node):
   '''left rotating avl node'''
@@ -45,7 +47,7 @@ def right_rotate(node):
   
 def height(node):
   if node == None:
-    return 0
+    return -1
   else:
     left_height = height(node.left_child)
     right_height = height(node.right_child)
@@ -55,18 +57,26 @@ def inorder_traversal(node, elements = []):
   """inorder traversal of avl tree"""
   if not node:
     return
-  inorder_traversal(node.left_child)
+  inorder_traversal(node.left_child, elements)
   elements.append(node.data)
-  inorder_traversal(node.right_child)
+  inorder_traversal(node.right_child, elements)
   
 def find_min(node):
   if not node:
-    return -1
+    return None
   tmp = node
   while tmp.left_child:
     tmp = tmp.left_child
-  return tmp.data
-  
+  return tmp
+
+def find_max(node):
+  if not node:
+    return None
+  tmp = node
+  while tmp.right_child:
+    tmp = tmp.right_child
+  return tmp
+
 def successor(node):
   """successor of the node. returns -1 if there is no successor"""
   def find_first_left_parent(node):
@@ -104,35 +114,42 @@ def predecessor(node):
 def insert_node(node, i):
   if node == None:
     return AvlNode(i)
-  if node.data < i:
-    insert_node(node.left_child, i)
+  if i < node.data:
+    node.left_child = insert_node(node.left_child, i)
+    node.left_child.parent = node
   else:
-    return insert_node(node.right_child, i)
+    node.right_child = insert_node(node.right_child, i)    
+    node.right_child.parent = node
   set_node_height(node)
-  //fix avl tree
+  return node
+  #fix avl tree
 
 class AvlNode:
   
   def __init__(self, data, parent = None, left_node = None, 
                right_node = None, height = 0):
-    self.left_node = left_node
-    self.right_node = right_node
+    self.left_child = left_node
+    self.right_child = right_node
     self.height = height
     self.data = data
     self.parent = parent
 
-class AvlTree:
-  
-  def __init__(self):
-    self.head = None
-  
-  def insert(self, i):
-    pass    
-  
-  def delete(self, i):
-    pass
-  
-  def sort_tree(self):
-    sorted_elements = []
-    inorder_traversal(self.head, sorted_elements)
-    return sorted_elements
+  def __str__(self):
+    ret_string = "height: " + str(self.height) 
+    ret_string += " data: " + str(self.data)
+    return ret_string
+
+def main():
+  elements = []
+  head = AvlNode(10)
+  insert_node(head, 11)
+  insert_node(head, 9)
+  insert_node(head, 12)
+  insert_node(head, 8)
+  print predecessor(successor(head))
+  print successor(predecessor(head))
+  inorder_traversal(head, elements)
+  print elements
+
+if __name__ == '__main__':
+  main()
