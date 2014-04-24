@@ -2,6 +2,42 @@
 
 __author__ = 'devansh.mht@gmail.com'
 
+def left_rotate(node):
+  '''left rotating avl node'''
+  x = node
+  y = x.right_child
+  a = x.left_child
+  b = y.left_child
+  c = y.right_child
+  y.left_child = x
+  x.right_child = b
+  if b.height > a.height:
+    x.height = b.height + 1
+  else:
+    x.height = a.height + 1
+  if x.height > c.height:
+    y.height = x.height + 1
+  else:
+    y.height = c.height + 1
+    
+def right_rotate(node):
+  '''right rotating avl node'''
+  y = node
+  x = y.left_child
+  a = x.left_child
+  b = x.right_child 
+  c = y.right_child
+  y.left_child = b
+  x.right_child = y
+  if b.height > c.height:
+    y.height = b.height + 1
+  else:
+    b.height = c.height + 1
+  if a.height > y.height:
+    x.height = a.height + 1
+  else:
+    x.height = y.height + 1
+
 def height(node):
   if node == None:
     return 0
