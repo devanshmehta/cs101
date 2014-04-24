@@ -20,14 +20,58 @@ def inorder_traversal(node, elements = []):
   inorder_traversal(node.left_child)
   elements.append(node.data)
   inorder_traversal(node.right_child)
+  
+def find_min(node):
+  if not node:
+    return -1
+  tmp = node
+  while tmp.left_child:
+    tmp = tmp.left_child
+  return tmp.data
+  
+def successor(node):
+  """successor of the node. returns -1 if there is no successor"""
+  def find_first_left_parent(node):
+    if not node.parent:
+      return -1
+    else:
+      parent = node.parent
+      if parent.left_child == node:
+        return parent
+      else:
+        return find_first_left_parent(parent)
+        
+  if node.right_child:
+    return find_min(node.right_child)
+  else:
+    return find_first_left_parent(node)
+    
+def predecessor(node):
+  """predecessor of the node. returns -1 if there is no predecessor"""
+  def find_first_right_parent(node):
+    if not node.parent:
+      return -1
+    else:
+      parent = node.parent
+      if parent.right_child == node:
+        return parent.data
+      else:
+        find_first_right_parent(parent)
+        
+  if node.left_child:
+    return find_max(node.left_child)
+  else:
+    return find_first_right_parent(node)
 
 class AvlNode:
   
-  def __init__(self, data, left_node = None, right_node = None, height = 0):
+  def __init__(self, data, parent = None, left_node = None, 
+               right_node = None, height = 0):
     self.left_node = left_node
     self.right_node = right_node
     self.height = height
     self.data = data
+    self.parent = parent
 
 class AvlTree:
   
@@ -51,9 +95,6 @@ class AvlTree:
     while node:
       node = node.right_child
     return node.data
-  
-  def successor(self):
-    pass
   
   def predecessor(self):
     pass
