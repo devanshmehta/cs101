@@ -146,6 +146,30 @@ def insert_node(node, i):
     right_rotate(node.right_child)
     return left_rotate(node.left_child)
   return node
+
+def delete_node(node, i):
+  if node == None:
+    return None
+  if i < node.data:
+    delete_node(node.left_child, i)
+  elif i > node.data:
+    delete_node(node.right_child, i)
+  else:
+    left_child = node.left_child
+    right_child = node.right_child
+    if left_child and right_child:
+      su = sucessor(node)
+      node.data = su.data
+      delete_node(node.right_child, su.data)
+    elif left_child:
+      left_child.parent = node.parent
+      return node
+    elif right_child:
+      right_child.parent = node.parent
+      return node
+    else:
+      #leaf node
+      return node
   
 class AvlNode:
   
