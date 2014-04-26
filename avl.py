@@ -91,8 +91,6 @@ def successor(node):
     if not node.parent:
       return None
     else:
-      print "parent"
-      print node.parent
       parent = node.parent
       if parent.left_child == node:
         return parent
@@ -151,25 +149,29 @@ def delete_node(node, i):
   if node == None:
     return None
   if i < node.data:
-    delete_node(node.left_child, i)
+    node.left_child = delete_node(node.left_child, i)
+    set_node_height(node)
+    return node
   elif i > node.data:
-    delete_node(node.right_child, i)
+    node.right_child = delete_node(node.right_child, i)
+    set_node_height(node)
+    return node
   else:
     left_child = node.left_child
     right_child = node.right_child
     if left_child and right_child:
-      su = sucessor(node)
+      su = successor(node)
       node.data = su.data
-      delete_node(node.right_child, su.data)
+      node.right_child = delete_node(node.right_child, su.data)
+      return node
     elif left_child:
       left_child.parent = node.parent
-      return node
+      return left_child
     elif right_child:
       right_child.parent = node.parent
-      return node
+      return right_child
     else:
-      #leaf node
-      return node
+      return None
   
 class AvlNode:
   
@@ -197,9 +199,12 @@ def main():
   head = insert_node(head, 6)
   head = insert_node(head, 5)
   head = insert_node(head, 4)
+  head = delete_node(head, 8)
+  print head
   #insert_node(head, 8)
-  #print insert_node(head, 13)
-  #print insert_node(head, 14)
+  head = insert_node(head, 13)
+  head = insert_node(head, 14)
+  print head
   #print insert_node(head, 15)
   print successor(predecessor(head))
   print predecessor(successor(head))
