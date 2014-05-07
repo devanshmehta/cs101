@@ -17,7 +17,7 @@ class OpenAddressing:
     index = 0
     while index < self.size:
       hash_value = hash(i, index)
-      if not self.table[hash_value]:
+      if not self.table[hash_value] or self.delete_me[hash_value]:
         self.table[hash_value] = i
         return True
     return False
