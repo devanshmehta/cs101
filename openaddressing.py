@@ -26,4 +26,12 @@ class OpenAddressing:
     pass
   
   def search(self, i):
-    pass
+    index = 0
+    while index < self.size:
+      hash_value = hash(i, index)
+      if not self.table[hash_value]:
+        return False
+      if (self.table[hash_value] == i and
+          not self.delete_me[hash_value]):
+        return True
+    return False
