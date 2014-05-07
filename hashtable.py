@@ -5,9 +5,6 @@ __author__ == 'devansh.mht@gmail.com'
 def hash(i, table_size):
   pass
 
-def insert_at_tail(node):
-  """inserts at the tail"""
-
 class Node:
   
   def __init__(self, data = None, next = None):
