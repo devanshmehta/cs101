@@ -23,7 +23,15 @@ class OpenAddressing:
     return False
   
   def delete(self, i):
-    pass
+    index = 0 
+    while index < self.size:
+      hash_value = hash(i, index)
+      if not self.table[hash_value]:
+        return False
+      if self.table[hash_value] == i:
+        self.delete_me[hash_value] = True
+        return True
+    return False
   
   def search(self, i):
     index = 0
