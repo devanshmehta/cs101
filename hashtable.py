@@ -1,6 +1,6 @@
 #hash table with chaining
 
-__author__ == 'devansh.mht@gmail.com'
+__author__ = 'devansh.mht@gmail.com'
 
 def hash(i, table_size):
   pass
