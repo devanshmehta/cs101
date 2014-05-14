@@ -3,7 +3,8 @@
 __author__ = 'devansh.mht@gmail.com'
 
 def hash(i, table_size):
-  pass
+  """implementing the most basic hash function"""
+  return i % table_size
 
 class Node:
   
