@@ -130,6 +130,8 @@ def get_height_diff(node):
   return height_node(node.left_child) - height_node(node.right_child)
     
 def insert_node(node, i):
+  """insert node can potentially change the height of the tree
+     it returns the new head of the tree"""
   if node == None:
     return AvlNode(i)
   if i < node.data:
