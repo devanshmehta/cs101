@@ -1,4 +1,7 @@
-"""Balanced binary tree. AVL Tree"""
+"""Balanced binary tree. AVL Tree. 
+   It is a self balanced tree in which 
+   height of the two children of a node 
+   atmost differ by 1"""
 
 __author__ = 'devansh.mht@gmail.com'
 
