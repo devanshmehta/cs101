@@ -12,12 +12,16 @@ def max(a, b):
     return b
 
 def height_node(node):
+  """gets the height of the node if the node has no 
+     children then its height is 0 and if it is none
+     then -1"""
   if node == None:
     return -1
   else:
     return node.height
     
 def set_node_height(node):
+  """sets the height of the given node"""
   if node == None:
     return
   left_height = height_node(node.left_child)
