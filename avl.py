@@ -1,4 +1,7 @@
-"""Balanced binary tree. AVL Tree"""
+"""Balanced binary tree. AVL Tree. 
+   It is a self balanced tree in which 
+   height of the two children of a node 
+   atmost differ by 1"""
 
 __author__ = 'devansh.mht@gmail.com'
 
@@ -9,12 +12,16 @@ def max(a, b):
     return b
 
 def height_node(node):
+  """gets the height of the node if the node has no 
+     children then its height is 0 and if it is none
+     then -1"""
   if node == None:
     return -1
   else:
     return node.height
     
 def set_node_height(node):
+  """sets the height of the given node"""
   if node == None:
     return
   left_height = height_node(node.left_child)
@@ -123,6 +130,8 @@ def get_height_diff(node):
   return height_node(node.left_child) - height_node(node.right_child)
     
 def insert_node(node, i):
+  """insert node can potentially change the height of the tree
+     it returns the new head of the tree"""
   if node == None:
     return AvlNode(i)
   if i < node.data:
